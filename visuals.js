@@ -2,7 +2,7 @@
 (function () {
   'use strict';
   var effects = [], cache = {}, reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var THEMES = ['#ae8355', '#b79b55', '#8e829e', '#738550', '#bd8b48', '#436c65', '#278d99'];
+  var THEMES = ['#ae8355', '#b79b55', '#8e829e', '#738550', '#bd8b48', '#436c65', '#278d99', '#d6a33c'];
   var MAX_EFFECTS = 14;
   function circle(c, x, y, r) { c.beginPath(); c.arc(x, y, Math.max(0, r), 0, Math.PI * 2); }
   function sprite(p, im) {

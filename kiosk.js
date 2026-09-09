@@ -1,39 +1,8 @@
-(function(){
-  "use strict";
-  var end=document.getElementById("endOverlay");
-  var home=document.getElementById("homeBtn");
-  var retry=document.getElementById("retryBtn");
-  var hint=document.getElementById("returnHint");
-  var timer=0,interval=0,left=15;
-
-  function clearTimers(){
-    if(timer)clearTimeout(timer);
-    if(interval)clearInterval(interval);
-    timer=0;interval=0;left=15;
-    if(hint)hint.textContent="";
-  }
-  function goHome(){
-    clearTimers();
-    location.replace(location.pathname+"?kiosk=8");
-  }
-  function startCountdown(){
-    clearTimers();
-    left=15;
-    if(hint)hint.textContent=left+"초 후 시작 화면으로 돌아갑니다.";
-    interval=setInterval(function(){
-      left--;
-      if(hint)hint.textContent=left>0?left+"초 후 시작 화면으로 돌아갑니다.":"다음 플레이어를 위해 시작 화면으로 돌아갑니다.";
-      if(left<=0){clearInterval(interval);interval=0;}
-    },1000);
-    timer=setTimeout(goHome,15000);
-  }
-
-  if(home)home.addEventListener("click",goHome);
-  if(retry)retry.addEventListener("click",clearTimers);
-  if(end){
-    new MutationObserver(function(){
-      if(end.classList.contains("active"))startCountdown();
-      else clearTimers();
-    }).observe(end,{attributes:true,attributeFilter:["class"]});
-  }
+/* Assets must decode before a participant starts. Results remain until reset. */
+(function(){'use strict';
+var button=document.getElementById('startBtn'),status=document.getElementById('assetStatus');
+button.disabled=true;status.textContent='친구들을 불러오고 있어요…';
+var paths=window.__NP_GAME__?window.__NP_GAME__.PARKS.map(function(p){return p.image}):[];
+if(!paths.length){status.textContent='게임을 불러오지 못했어요. 화면을 새로고침해 주세요.';return}
+Promise.all(paths.map(function(path){return new Promise(function(resolve){var im=new Image();im.onload=function(){resolve(true)};im.onerror=function(){resolve(false)};im.src=path})})).then(function(results){var ok=results.every(Boolean);button.disabled=!ok;status.textContent=ok?'':'이미지를 불러오지 못했어요. 연결을 확인하고 새로고침해 주세요.'});
 })();
