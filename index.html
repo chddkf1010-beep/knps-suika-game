@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>모여라! 동부국립공원</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="viewport"><main id="app" aria-label="모여라 동부국립공원 게임">
+    <header class="topbar">
+      <div class="brand"><p class="eyebrow">일곱 공원, 하나의 자연</p><h1>모여라!<br>동부국립공원</h1></div>
+      <div class="score-box"><span>SCORE</span><strong id="score">0</strong></div>
+      <div id="timeBox" class="time-box hidden"><span>TIME</span><strong id="time">03:00</strong></div>
+      <div class="next-box"><span>NEXT</span><canvas id="nextCanvas" width="92" height="92"></canvas><strong id="nextName">금정산</strong></div>
+    </header>
+
+    <section id="gameShell" class="game-shell">
+      <canvas id="gameCanvas" width="720" height="920" aria-label="게임 플레이 영역"></canvas>
+      <div id="toast" class="toast" aria-live="polite"></div>
+      <div id="startOverlay" class="overlay active">
+        <div class="panel">
+          <p class="eyebrow">동부권역 국립공원 합치기</p>
+          <h2>모여라!<br>동부국립공원</h2>
+          <div class="start-art"><img src="assets/characters/07_hallyeohaesang.png" alt="한려해상국립공원의 팔색조와 바다" onerror="this.style.display='none'"></div>
+          <p>같은 국립공원끼리 합쳐<br>더 넓은 국립공원으로 성장시켜 보세요!</p>
+          <p class="goal">최종 목표는 한려해상국립공원!</p>
+          <button id="startBtn" class="primary">게임 시작</button>
+          <p class="start-hint">좌우로 위치를 정하고 톡!<br>가만히 있어도 4초 뒤에 떨어져요.</p>
+        </div>
+      </div>
+      <div id="endOverlay" class="overlay">
+        <div class="panel">
+          <p class="eyebrow" id="endLabel">GAME OVER</p>
+          <h2 id="endTitle">게임 종료</h2>
+          <canvas id="resultCanvas" width="220" height="220" aria-label="최고 달성 공원 이미지"></canvas>
+          <div class="result"><span>최종 점수</span><strong id="finalScore">0</strong></div>
+          <div class="result"><span>최고 달성 단계</span><strong id="highestPark">금정산국립공원</strong></div>
+          <p id="resultMessage"></p>
+          <button id="retryBtn" class="primary">다시 도전하기</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="progress-wrap" aria-label="공원 성장 진행도">
+      <div class="collection-title"><span>나의 국립공원 도감</span><strong id="collectionCount">1 / 7</strong></div>
+      <div id="progress" class="progress"></div>
+    </section>
+    <footer class="controls">
+      <button id="restartBtn">↻ 다시하기</button>
+      <p>좌우 이동 · 클릭 / SPACE 낙하<br><span>가만히 있어도 4초 뒤 자동 낙하</span></p>
+      <button id="soundBtn" aria-label="소리 끄기">🔊 소리</button>
+    </footer>
+  </main></div>
+  <script src="matter.min.js"></script>
+  <script src="visuals.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
