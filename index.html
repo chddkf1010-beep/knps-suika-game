@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>모여라! 동부국립공원</title>
-  <link rel="stylesheet" href="style.css?v=20260909-4">
+  <link rel="stylesheet" href="style.css?v=20260909-5">
 </head>
 <body>
   <div id="viewport"><main id="app" aria-label="모여라 동부국립공원 게임">
@@ -22,7 +22,7 @@
         <div class="panel">
           <p class="eyebrow">동부권역 국립공원 합치기</p>
           <h2>모여라!<br>동부국립공원</h2>
-          <div class="start-art"><img src="assets/characters/07_hallyeohaesang.jpg" alt="한려해상국립공원의 팔색조와 바다" onerror="this.style.display='none'"></div>
+          <div class="start-art"><img src="assets/characters/07_hallyeohaesang_v2.svg" alt="한려해상국립공원의 팔색조와 바다"></div>
           <p>같은 국립공원끼리 합쳐<br>더 넓은 국립공원으로 성장시켜 보세요!</p>
           <p class="goal">최종 목표는 한려해상국립공원!</p>
           <button id="startBtn" class="primary">게임 시작</button>
@@ -53,7 +53,27 @@
     </footer>
   </main></div>
   <script src="https://cdn.jsdelivr.net/npm/matter-js@0.20.0/build/matter.min.js"></script>
-  <script src="visuals.js?v=20260909-4"></script>
-  <script src="game.js?v=20260909-4"></script>
+  <script>
+    (function(){
+      var proto=HTMLImageElement.prototype;
+      var d=Object.getOwnPropertyDescriptor(proto,"src");
+      if(!d||!d.set)return;
+      Object.defineProperty(proto,"src",{
+        configurable:true,
+        enumerable:d.enumerable,
+        get:d.get,
+        set:function(v){
+          if(typeof v==="string"){
+            v=v.replace(/assets\/characters\/05_gyeongju\.jpg(?:[?#].*)?$/, "assets/characters/05_gyeongju_v2.svg")
+               .replace(/assets\/characters\/06_jirisan\.jpg(?:[?#].*)?$/, "assets/characters/06_jirisan_v2.svg")
+               .replace(/assets\/characters\/07_hallyeohaesang\.jpg(?:[?#].*)?$/, "assets/characters/07_hallyeohaesang_v2.svg");
+          }
+          return d.set.call(this,v);
+        }
+      });
+    })();
+  </script>
+  <script src="visuals.js?v=20260909-5"></script>
+  <script src="game.js?v=20260909-5"></script>
 </body>
 </html>
