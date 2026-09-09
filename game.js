@@ -10,10 +10,10 @@ var CONFIG={
   direct:[{level:1,weight:.5},{level:2,weight:.3},{level:3,weight:.2}],seed:null
 };
 var PARKS=[
- {level:1,key:"geumjeongsan",short:"금정산",name:"금정산국립공원",image:"assets/characters/01_geumjeongsan.png",diameter:.085,color:"#c89558",area:66.136,score:10},
- {level:2,key:"gayasan",short:"가야산",name:"가야산국립공원",image:"assets/characters/02_gayasan.png",diameter:.108,color:"#d59655",area:76.792,score:30},
- {level:3,key:"juwangsan",short:"주왕산",name:"주왕산국립공원",image:"assets/characters/03_juwangsan.png",diameter:.135,color:"#9d7557",area:106.114,score:60},
- {level:4,key:"palgongsan",short:"팔공산",name:"팔공산국립공원",image:"assets/characters/04_palgongsan.png",diameter:.165,color:"#75523c",area:126.058,score:100},
+ {level:1,key:"geumjeongsan",short:"금정산",name:"금정산국립공원",image:"assets/characters/01_geumjeongsan.svg",diameter:.085,color:"#c89558",area:66.136,score:10},
+ {level:2,key:"gayasan",short:"가야산",name:"가야산국립공원",image:"assets/characters/02_gayasan.svg",diameter:.108,color:"#d59655",area:76.792,score:30},
+ {level:3,key:"juwangsan",short:"주왕산",name:"주왕산국립공원",image:"assets/characters/03_juwangsan.svg",diameter:.135,color:"#9d7557",area:106.114,score:60},
+ {level:4,key:"palgongsan",short:"팔공산",name:"팔공산국립공원",image:"assets/characters/04_palgongsan.svg",diameter:.165,color:"#75523c",area:126.058,score:100},
  {level:5,key:"gyeongju",short:"경주",name:"경주국립공원",image:"assets/characters/05_gyeongju.png",diameter:.20,color:"#ce743f",area:136.550,score:150},
  {level:6,key:"jirisan",short:"지리산",name:"지리산국립공원",image:"assets/characters/06_jirisan.png",diameter:.242,color:"#293830",area:483.022,score:250},
  {level:7,key:"hallyeo",short:"한려해상",name:"한려해상국립공원",image:"assets/characters/07_hallyeohaesang.png",diameter:.285,color:"#267d87",area:537.479,score:500}
@@ -39,24 +39,7 @@ function spawnPending(now){if(state!=="PLAYING"||pending)return;pending={level:c
 function drop(){if(state!=="PLAYING"||!pending)return false;var q=pending;pending=null;var b=makeBody(q.level,q.x,CONFIG.play.spawnY,false);Body.setVelocity(b,{x:0,y:.6});sound("drop");currentLevel=nextLevel;nextLevel=drawLevel();nextSpawnAt=performance.now()+CONFIG.spawnDelayMs;drawNext();return true}
 function onCollision(ev){if(state!=="PLAYING")return;ev.pairs.forEach(function(pair){var a=pair.bodyA.plugin.park,b=pair.bodyB.plugin.park;if(a)a.landed=true;if(b)b.landed=true;if(!a||!b||a.level!==b.level||a.mergeLocked||b.mergeLocked)return;a.mergeLocked=b.mergeLocked=true;mergeQueue.push({a:pair.bodyA,b:pair.bodyB,level:a.level})})}
 function exists(b){return Composite.get(world,b.id,"body")===b}
-function afterUpdate(){
-  if(!mergeQueue.length||state!=="PLAYING")return;
-  var q=mergeQueue.splice(0);q.sort(function(x,y){return x.a.id-y.a.id});
-  q.forEach(function(m){
-    if(!exists(m.a)||!exists(m.b))return;
-    removeBody(m.a);removeBody(m.b);
-    var x=(m.a.position.x+m.b.position.x)/2,y=(m.a.position.y+m.b.position.y)/2,p=park(m.level);
-    score+=p.score;updateScore();
-    visuals.merge(x,y,Math.min(7,m.level+1),p.score,m.level===7,performance.now());
-    if(m.level===7){showToast("동부권역 완성!","bonus",1500,"+500 BONUS · 새로운 탐험을 이어가세요");sound("win");return}
-    var n=makeBody(m.level+1,x,y,true),vx=(m.a.velocity.x+m.b.velocity.x)*.18,vy=(m.a.velocity.y+m.b.velocity.y)*.18;
-    Body.setVelocity(n,{x:vx,y:vy});
-    var created=park(m.level+1),firstFinal=created.level===7&&!finalAchieved;
-    if(created.level===7)finalAchieved=true;
-    showToast(firstFinal?"한려해상국립공원 완성!":created.name+"!",firstFinal?"special":"",firstFinal?1500:800,firstFinal?"동부권역 최종 단계 달성":created.area.toFixed(3)+" km² · +"+p.score);
-    sound(firstFinal?"win":"merge",created.level);
-  });
-}
+function afterUpdate(){if(!mergeQueue.length||state!=="PLAYING")return;var q=mergeQueue.splice(0);q.sort(function(x,y){return x.a.id-y.a.id});q.forEach(function(m){if(!exists(m.a)||!exists(m.b))return;removeBody(m.a);removeBody(m.b);var x=(m.a.position.x+m.b.position.x)/2,y=(m.a.position.y+m.b.position.y)/2,p=park(m.level);score+=p.score;updateScore();visuals.merge(x,y,Math.min(7,m.level+1),p.score,m.level===7,performance.now());if(m.level===7){showToast("동부권역 완성!","bonus",1500,"+500 BONUS · 새로운 탐험을 이어가세요");sound("win");return}var n=makeBody(m.level+1,x,y,true),vx=(m.a.velocity.x+m.b.velocity.x)*.18,vy=(m.a.velocity.y+m.b.velocity.y)*.18;Body.setVelocity(n,{x:vx,y:vy});var created=park(m.level+1),firstFinal=created.level===7&&!finalAchieved;if(created.level===7)finalAchieved=true;showToast(firstFinal?"한려해상국립공원 완성!":created.name+"!",firstFinal?"special":"",firstFinal?1500:800,firstFinal?"동부권역 최종 단계 달성":created.area.toFixed(3)+" km² · +"+p.score);sound(firstFinal?"win":"merge",created.level)})}
 function removeBody(b){World.remove(world,b);var i=bodies.indexOf(b);if(i>=0)bodies.splice(i,1)}
 function burst(x,y,level){var colors=[park(Math.min(level,7)).color,"#f5cf68","#fff"];for(var i=0;i<10+level*2;i++)particles.push({x:x,y:y,vx:(Math.random()-.5)*(2+level*.2),vy:(Math.random()-.8)*(2+level*.2),life:500+Math.random()*350,color:colors[i%3],size:2+Math.random()*4})}
 function updateScore(){ui.score.textContent=score.toLocaleString("ko-KR")}
@@ -71,14 +54,7 @@ function coverImage(c,im,x,y,size,angle){c.save();c.translate(x,y);c.rotate(angl
 function fallback(c,p,x,y,size){c.save();c.translate(x,y);c.beginPath();c.arc(0,0,size/2,0,Math.PI*2);c.fillStyle=p.color;c.fill();c.strokeStyle="#fff";c.lineWidth=Math.max(3,size*.045);c.stroke();c.fillStyle="#fff";c.textAlign="center";c.font="bold "+Math.max(12,size*.22)+"px Malgun Gothic";c.fillText(p.level+"단계",0,-2);c.font="bold "+Math.max(10,size*.16)+"px Malgun Gothic";c.fillText(p.short,0,size*.22);c.restore()}
 function drawPark(c,level,x,y,size,angle,pop){visuals.drawPark(c,park(level),images[level],x,y,size,angle,pop)}
 function drawNext(){nctx.clearRect(0,0,nextCanvas.width,nextCanvas.height);var lv=pending?nextLevel:currentLevel;drawPark(nctx,lv,46,46,76,0,1);var name=$("#nextName");if(name)name.textContent=park(lv).short;nextCanvas.setAttribute("aria-label","다음 "+park(lv).name)}
-function render(now){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  var p=CONFIG.play;visuals.background(ctx,canvas.width,canvas.height,p,now,dangerSince!==null);
-  visuals.drawEffects(ctx,now,false,canvas.width,canvas.height);
-  bodies.forEach(function(b){var d=b.plugin.park,pop=!visuals.reduced&&now<d.popUntil?1+.2*Math.sin((d.popUntil-now)/240*Math.PI):1;drawPark(ctx,d.level,b.position.x,b.position.y,radius(d.level)*2,d.visualAngle,pop)});
-  if(pending){var hint=!visuals.reduced&&now-pendingAt>CONFIG.autoDropMs-420?Math.sin(now/45)*2:0;drawPark(ctx,pending.level,pending.x,p.spawnY+hint,radius(pending.level)*2,0,1)}
-  visuals.drawEffects(ctx,now,true,canvas.width,canvas.height);
-}
+function render(now){ctx.clearRect(0,0,canvas.width,canvas.height);var p=CONFIG.play;visuals.background(ctx,canvas.width,canvas.height,p,now,dangerSince!==null);visuals.drawEffects(ctx,now,false,canvas.width,canvas.height);bodies.forEach(function(b){var d=b.plugin.park,pop=!visuals.reduced&&now<d.popUntil?1+.2*Math.sin((d.popUntil-now)/240*Math.PI):1;drawPark(ctx,d.level,b.position.x,b.position.y,radius(d.level)*2,d.visualAngle,pop)});if(pending){var hint=!visuals.reduced&&now-pendingAt>CONFIG.autoDropMs-420?Math.sin(now/45)*2:0;drawPark(ctx,pending.level,pending.x,p.spawnY+hint,radius(pending.level)*2,0,1)}visuals.drawEffects(ctx,now,true,canvas.width,canvas.height)}
 function logicalX(clientX){var r=canvas.getBoundingClientRect();return Math.max(CONFIG.play.left+radius(pending?pending.level:1),Math.min(CONFIG.play.right-radius(pending?pending.level:1),(clientX-r.left)*canvas.width/r.width))}
 canvas.addEventListener("pointerdown",function(e){if(state!=="PLAYING"||!pending)return;e.preventDefault();canvas.setPointerCapture(e.pointerId);pointer={id:e.pointerId,x:e.clientX,y:e.clientY,t:performance.now(),moved:0};pending.x=logicalX(e.clientX)});
 canvas.addEventListener("pointermove",function(e){if(state!=="PLAYING"||!pending)return;if(e.pointerType==="mouse"&&!pointer){pending.x=logicalX(e.clientX);return}if(!pointer||pointer.id!==e.pointerId)return;e.preventDefault();pointer.moved=Math.max(pointer.moved,Math.hypot(e.clientX-pointer.x,e.clientY-pointer.y));pending.x=logicalX(e.clientX)});
