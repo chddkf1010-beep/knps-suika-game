@@ -1,0 +1,1 @@
+High-quality character assets are uploaded as binary WebP blobs generated directly from the original 1254×1254 PNG files. Do not replace them with inline SVG/base64 wrappers.
