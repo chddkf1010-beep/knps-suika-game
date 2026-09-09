@@ -14,8 +14,7 @@
   }
   function goHome(){
     clearTimers();
-    var base=location.pathname;
-    location.replace(base+"?kiosk=7");
+    location.replace(location.pathname+"?kiosk=8");
   }
   function startCountdown(){
     clearTimers();
