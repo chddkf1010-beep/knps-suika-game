@@ -1,0 +1,74 @@
+/* Portrait StandByME layout: the device is used in a 9:16 orientation. */
+@font-face{font-family:ParkTitle;src:url('assets/fonts/DoHyeon.ttf') format('truetype');font-display:swap}
+@media (orientation: portrait){
+#app{width:900px;height:1600px;padding:34px 38px;border-radius:28px}
+.topbar{height:112px}
+.topbar h1{font-size:45px;letter-spacing:-1.4px}
+.topbar .eyebrow{font-size:12px}
+.topbar>span{font-size:18px;margin-top:24px}
+.left-rail{top:166px;left:42px;width:816px;height:122px;display:grid;grid-template-columns:200px minmax(0,1fr) 198px;gap:16px;align-items:stretch}
+.left-rail>.eyebrow{position:absolute;top:-24px;left:2px;font-size:14px;margin:0}
+.score-box{height:122px;border:1px solid #afc6b7;border-radius:18px;background:#ffffff80;padding:12px 17px 10px;display:flex;flex-direction:column;justify-content:center}
+.score-box>span{font-size:14px}
+.score-box strong{font-size:51px;line-height:1.05}
+.score-box small{font-size:12px;line-height:1.35}
+.guide-card{height:122px;margin:0;padding:13px 17px;background:#ffffff80;border:1px solid #d0ddcf;border-radius:18px;overflow:hidden}
+.guide-card>small{font-size:11px;letter-spacing:1.1px}
+.guide-card h2{font-size:24px;line-height:1.08;margin:6px 0 8px}
+.guide-card ol{display:flex;gap:11px;padding:0;margin:0;list-style-position:inside;font-size:12px;line-height:1.35}
+.guide-card ol li{flex:1}
+.guide-card p{display:none}
+.controls{height:122px;display:grid;grid-template-columns:1fr 1fr;gap:8px;align-content:center}
+.controls button{min-height:48px;padding:8px 7px;font-size:13px;border-radius:11px;white-space:nowrap}
+.game-shell{top:402px;left:82px;width:736px;height:936px;aspect-ratio:auto;border-width:8px;border-radius:24px}
+#gameCanvas{width:720px;height:920px}
+.board-caption{display:none}
+.right-rail{top:306px;left:42px;right:auto;width:816px;height:82px;display:grid;grid-template-columns:1fr 1fr;gap:16px;text-align:left}
+.next-box{height:82px;display:grid;grid-template-columns:76px minmax(0,1fr);grid-template-rows:24px 1fr;align-items:center;justify-content:initial;gap:0 9px;padding:7px 15px;border-radius:18px}
+.next-box>small{grid-column:1 / -1;width:auto;margin:0;font-size:11px}
+.next-box canvas{width:55px;height:55px;grid-row:2}
+.next-box strong{font-size:23px}
+.goal-card{height:82px;margin:0;padding:6px 13px;display:grid;grid-template-columns:74px minmax(0,1fr);grid-template-rows:20px 28px 1fr;column-gap:10px;align-items:center;background:#fffcf3;border:1px solid #d0d6c1;border-radius:18px;text-align:left;overflow:hidden}
+.goal-card>small{grid-column:1 / -1;font-size:10px;letter-spacing:1px}
+.goal-card>img{grid-row:2 / 4;width:66px;height:66px;margin:0;border-radius:50%}
+.goal-card h2{grid-row:2;grid-column:2;font-size:24px;margin:0 0 2px}
+.goal-card p{grid-row:3;font-size:11px;line-height:1.35;margin:0;grid-column:2}
+.rail-tip{display:none}
+.progress-wrap{left:42px;right:42px;bottom:62px;padding:11px 17px 9px;border-radius:18px}
+.collection-title{font-size:17px}
+.collection-title small{font-size:12px;margin-left:8px}
+.collection-title strong{font-size:24px}
+.progress{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px 8px;margin-top:2px}
+.step{width:auto;min-width:0;padding:0;opacity:.54}
+.step canvas{width:54px;height:54px}
+.step i{right:calc(50% - 29px);top:32px;width:17px;height:17px;font-size:10px}
+.step span{font-size:12px;margin-top:2px;white-space:nowrap}
+footer{bottom:23px;left:47px;right:47px;font-size:11px}
+.panel-start{width:820px;height:1490px;display:flex;flex-direction:column;align-items:center;padding:76px 58px 58px;text-align:center;border-radius:30px}
+.start-copy{width:100%}
+.start-copy>.eyebrow{font-size:13px}
+.start-copy h2{font-size:78px;line-height:1.06;margin:28px 0 22px}
+.lead{font-size:20px;line-height:1.55;margin-bottom:23px}
+.start-copy .primary{width:350px;margin-left:auto;margin-right:auto}
+.start-hint{font-size:13px;line-height:1.6;margin-top:18px}
+.start-art{width:100%;margin-top:38px}
+.start-art>small{font-size:11px;margin-bottom:12px}
+.start-art img{width:465px;height:465px}
+.start-art>p{font-size:20px;margin-top:14px}
+.edition{bottom:23px;right:35px;font-size:11px}
+.panel-end{width:720px;max-height:1420px;padding:30px 52px;border-radius:28px}
+.panel-end h2,.panel-info h2{font-size:42px}
+.panel-end #resultCanvas{width:230px;height:230px}
+.panel-info{width:700px;padding:34px 45px}
+.panel-info>img{width:260px;height:260px}
+.panel-info>p:not(.eyebrow){font-size:21px;line-height:1.65}
+.toast{top:29%;width:86%}
+.panel-start,.panel-end,.panel-info{max-height:calc(100% - 32px);overflow:auto}
+
+}
+@media (orientation: portrait) and (max-aspect-ratio:4/5){
+  .topbar h1{font-size:40px}
+  .panel-start{width:calc(100% - 36px);height:calc(100% - 36px);padding-left:40px;padding-right:40px}
+  .start-copy h2{font-size:70px}
+  .start-art img{width:420px;height:420px}
+}
