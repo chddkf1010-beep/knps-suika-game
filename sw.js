@@ -1,13 +1,13 @@
 /* Bump VERSION whenever the game or its required assets change. */
 'use strict';
-var VERSION = '20260911-12';
+var VERSION = '20260921-13';
 var CACHE = 'knps-game-' + VERSION;
 var FILES = [
   './index.html', './style.css?v=' + VERSION, './portrait.css?v=' + VERSION,
   './vendor/matter.min.js', './visuals.js?v=' + VERSION,
   './game.js?v=' + VERSION, './kiosk.js?v=' + VERSION,
   './portrait.js?v=' + VERSION, './offline.js?v=' + VERSION,
-  './assets/fonts/DoHyeon.ttf',
+  './assets/fonts/DoHyeon.ttf', './assets/fonts/Bandali.woff',
   './assets/characters/01_geumjeongsan_hq.webp',
   './assets/characters/02_gayasan_hq.webp',
   './assets/characters/03_juwangsan_hq.webp',
