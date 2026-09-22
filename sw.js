@@ -1,6 +1,6 @@
 /* Bump VERSION whenever the game or its required assets change. */
 'use strict';
-var VERSION = '20260921-13';
+var VERSION = '20260922-14';
 var CACHE = 'knps-game-' + VERSION;
 var FILES = [
   './index.html', './style.css?v=' + VERSION, './portrait.css?v=' + VERSION,
@@ -10,12 +10,12 @@ var FILES = [
   './assets/fonts/DoHyeon.ttf', './assets/fonts/Bandali.woff',
   './assets/characters/01_geumjeongsan_hq.webp',
   './assets/characters/02_gayasan_hq.webp',
-  './assets/characters/03_juwangsan_hq.webp',
+  './assets/characters/03_juwangsan_eagleowl.webp',
   './assets/characters/04_palgongsan_hq.webp',
   './assets/characters/05_gyeongju_hq.webp',
   './assets/characters/06_jirisan_hq.webp',
   './assets/characters/07_hallyeohaesang_hq.webp',
-  './assets/characters/08_eastern.png'
+  './assets/characters/08_eastern_eagleowl.webp'
 ];
 self.addEventListener('install', function(event) {
   // Atomic: an incomplete download must never advertise offline readiness.
