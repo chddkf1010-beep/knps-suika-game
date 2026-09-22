@@ -1,5 +1,5 @@
 /* Local fonts and kiosk artboards. The physics canvas keeps its 720:920 ratio. */
-@font-face{font-family:ParkTitle;src:url('assets/fonts/Bandali.woff') format('woff');font-display:swap}
+@font-face{font-family:ParkTitle;src:url('assets/fonts/DoHyeon.ttf') format('truetype');font-display:swap}
 @font-face{font-family:ParkCanvas;src:url('assets/fonts/DoHyeon.ttf') format('truetype');font-display:swap}
 body,button{font-family:ParkCanvas,'Malgun Gothic','Apple SD Gothic Neo',sans-serif}
 [hidden]{display:none!important}
