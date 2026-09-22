@@ -1,6 +1,6 @@
 /* Bump VERSION whenever the game or its required assets change. */
 'use strict';
-var VERSION = '20260922-14';
+var VERSION = '20260922-15';
 var CACHE = 'knps-game-' + VERSION;
 var FILES = [
   './index.html', './style.css?v=' + VERSION, './portrait.css?v=' + VERSION,
